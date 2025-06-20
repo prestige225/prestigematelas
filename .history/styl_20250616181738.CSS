@@ -1,0 +1,169 @@
+/* RESET & BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+  line-height: 1.6;
+}
+
+/* HEADER */
+header {
+  background-color: #1e3a8a;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header h1 {
+  font-size: 1.5rem;
+}
+header nav a {
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(to right, #3b82f6, #60a5fa);
+  color: white;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.hero p {
+  margin-bottom: 1rem;
+}
+.hero a {
+  background: white;
+  color: #2563eb;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* PRODUITS */
+.produits {
+  padding: 2rem 1rem;
+}
+.produits h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #1e40af;
+}
+.liste-produits-horizontal {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+.liste-produits-horizontal::-webkit-scrollbar {
+  display: none;
+}
+.produit {
+  min-width: 250px;
+  flex: 0 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  scroll-snap-align: start;
+  transition: transform 0.3s;
+}
+.produit:hover {
+  transform: scale(1.03);
+}
+.produit img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.produit-content {
+  padding: 1rem;
+}
+.produit-content h4 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+.produit-content p {
+  font-size: 0.875rem;
+  color: #555;
+}
+.produit-content button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* CAROUSEL (optionnel si tu veux ajouter) */
+.carousel {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 2rem auto;
+  border-radius: 12px;
+}
+.carousel-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 300%;
+}
+.carousel-images img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  flex: 0 0 100%;
+}
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 1;
+}
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .carousel-images img {
+    height: 250px;
+  }
+}
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero h2 {
+    font-size: 1.5rem;
+  }
+  .produit img {
+    height: 180px;
+  }
+}

@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prestige Store</title>
+  <link rel="stylesheet" href="styl.CSS" />
+  <style>
+    /* === Reset et base === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* === Header === */
+header {
+  background-color: #2563eb;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+header h1 {
+  font-size: 1.5rem;
+}
+header nav a {
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+header nav a:hover {
+  color: #cbd5e1;
+}
+
+/* === Hero Section === */
+.hero {
+  background-color: #f1f5f9;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+.hero h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+.hero a {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+.hero a:hover {
+  background-color: #1e40af;
+}
+
+/* === Produits Section === */
+.produits {
+  padding: 2rem;
+}
+.produits h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+.grid-produits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.produit {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.produit:hover {
+  transform: translateY(-5px);
+}
+/* .produit img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+} */
+
+
+
+.produit img {
+  width: 100%;
+  height: 500px; /* augmente la hauteur */
+  object-fit: cover;
+  border-bottom: 4px solid #2563eb; /* ligne bleue décorative */
+}
+
+.produit-content {
+  padding: 1rem;
+}
+.produit-content h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.produit-content p {
+  font-size: 0.9rem;
+  color: #555;
+}
+.produit button {
+  margin-top: 0.8rem;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+.produit button:hover {
+  background-color: #15803d;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  header nav {
+    margin-top: 1rem;
+  }
+  .hero h2 {
+    font-size: 1.5rem;
+  }
+  .grid-produits {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .hero p {
+    font-size: 1rem;
+  }
+  .produit img {
+    height: 160px;
+  }
+}
+
+.liste-produits-horizontal {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.liste-produits-horizontal::-webkit-scrollbar {
+  display: none; /* cacher la barre de scroll */
+}
+
+.liste-produits-horizontal .produit {
+  min-width: 250px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.liste-produits-horizontal .produit:hover {
+  transform: scale(1.02);
+}
+
+.liste-produits-horizontal img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.produit-content {
+  padding: 1rem;
+}
+.produit-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.produit-content p {
+  font-size: 0.9rem;
+  color: #555;
+}
+.produit-content button {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1rem;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+
+
+/* === Carrousel d'images pour chaque produit === */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-bottom: 4px solid #2563eb;
+  border-radius: 12px 12px 0 0;
+}
+.carousel img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+.carousel img.active {
+  opacity: 1;
+  z-index: 1;
+}
+.carousel button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+}
+.carousel .prev {
+  left: 10px;
+}
+.carousel .next {
+  right: 10px;
+}
+
+/* Responsive pour les carrousels */
+@media (max-width: 768px) {
+  .carousel {
+    height: 250px;
+  }
+}
+@media (max-width: 480px) {
+  .carousel {
+    height: 180px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Prestige Store</h1>
+    <nav>
+      <a href="#">Accueil</a>
+      <a href="#">Produits</a>
+      <a href="#">Panier</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h2>Bienvenue sur notre boutique</h2>
+    <p>Des produits éducatifs modernes et accessibles à tous !</p>
+    <a href="#">Voir les produits</a>
+  </section>
+
+  <!-- CARROUSEL D'IMAGES -->
+  <section class="carrousel-section">
+    <h2 style="text-align:center; margin-top:2rem;">Matelas en vedette</h2>
+    <div class="carousel">
+      <button class="prev" aria-label="Image précédente">&#10094;</button>
+      <div class="carousel-images">
+        <img src="assets/img/matelas1.jpg" alt="Matelas 1" />
+        <img src="assets/img/matelas2.jpg" alt="Matelas 2" />
+        <img src="assets/img/matelas3.jpg" alt="Matelas 3" />
+      </div>
+      <button class="next" aria-label="Image suivante">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- PRODUITS -->
+  <!-- <section class="produits">
+    <h3>Nos Matelas</h3>
+    <div class="liste-produits-horizontal">
+      <div class="produit">
+        <img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt="Matelas Confort" />
+        <div class="produit-content">
+          <h4>Matelas Confort</h4>
+          <p>Épaisseur 25cm, mousse mémoire</p>
+          <button>Ajouter</button>
+        </div>
+      </div>
+      <div class="produit">
+        <img src="assets/img/matelas2.jpg" alt="Matelas Premium" />
+        <div class="produit-content">
+          <h4>Matelas Premium</h4>
+          <p>Orthopédique, double face</p>
+          <button>Ajouter</button>
+        </div>
+      </div>
+      <div class="produit">
+        <img src="assets/img/matelas3.jpg" alt="Matelas Luxe" />
+        <div class="produit-content">
+          <h4>Matelas Luxe</h4>
+          <p>Ressorts ensachés, ultra confort</p>
+          <button>Ajouter</button>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+
+  <section class="produits">
+  <h3>Nos Matelas</h3>
+  <div class="liste-produits-horizontal">
+
+    <!-- Matelas Confort -->
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt="Matelas Confort" class="active" />
+        <img src="image/matelas 1.jpg" alt="Matelas Confort angle" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Confort détails" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Confort</h4>
+        <p>Épaisseur 25cm, mousse mémoire</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+    <!-- Matelas Premium -->
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/MATELA3.jpg" alt="Matelas Premium" class="active" />
+        <img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt="Matelas Premium autre vue" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Premium détails" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Premium</h4>
+        <p>Orthopédique, double face</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+    <!-- Matelas Luxe -->
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/MATELA3.jpg" alt="Matelas Luxe" class="active" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Luxe profil" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Luxe texture" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Luxe</h4>
+        <p>Ressorts ensachés, ultra confort</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- SCRIPT POUR CARROUSEL -->
+  <script>
+    const carousel = document.querySelector('.carousel-images');
+    const images = document.querySelectorAll('.carousel-images img');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+
+    let index = 0;
+
+    function updateCarousel() {
+      carousel.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      index = (index + 1) % images.length;
+      updateCarousel();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      index = (index - 1 + images.length) % images.length;
+      updateCarousel();
+    });
+
+
+
+
+
+    document.querySelectorAll('.carousel').forEach(carousel => {
+    const images = carousel.querySelectorAll('img');
+    let index = 0;
+
+    const showImage = (i) => {
+      images.forEach(img => img.classList.remove('active'));
+      images[i].classList.add('active');
+    };
+
+    carousel.querySelector('.next').addEventListener('click', () => {
+      index = (index + 1) % images.length;
+      showImage(index);
+    });
+
+    carousel.querySelector('.prev').addEventListener('click', () => {
+      index = (index - 1 + images.length) % images.length;
+      showImage(index);
+    });
+
+    showImage(index);
+  });
+  </script>
+
+</body>
+</html>

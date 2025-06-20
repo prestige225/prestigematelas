@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prestige Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Prestige Store</h1>
+    <nav>
+      <a href="#">Accueil</a>
+      <a href="#">Produits</a>
+      <a href="#">Panier</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h2>Bienvenue sur notre boutique</h2>
+    <p>Des produits éducatifs modernes et accessibles à tous !</p>
+    <a href="#">Voir les produits</a>
+  </section>
+
+  <!-- CARROUSEL D'IMAGES -->
+  <section class="carrousel-section">
+    <h2>Matelas Vedette</h2>
+    <div class="carousel">
+      <button class="prev">&#10094;</button>
+      <div class="carousel-images">
+        <img src="assets/img/matelas1.jpg" alt="Matelas 1">
+        <img src="assets/img/matelas2.jpg" alt="Matelas 2">
+        <img src="assets/img/matelas3.jpg" alt="Matelas 3">
+      </div>
+      <button class="next">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- PRODUITS EN SCROLL HORIZONTAL -->
+  <section class="produits">
+    <h3>Nos Matelas</h3>
+    <div class="liste-produits-horizontal">
+      <div class="produit">
+        <img src="assets/img/matelas1.jpg" alt="Matelas 1">
+        <div class="produit-content">
+          <h4>Matelas Confort</h4>
+          <p>Épaisseur 25cm, mousse mémoire</p>
+          <button>Ajouter</button>
+        </div>
+      </div>
+      <div class="produit">
+        <img src="assets/img/matelas2.jpg" alt="Matelas 2">
+        <div class="produit-content">
+          <h4>Matelas Premium</h4>
+          <p>Orthopédique, double face</p>
+          <button>Ajouter</button>
+        </div>
+      </div>
+      <div class="produit">
+        <img src="assets/img/matelas3.jpg" alt="Matelas 3">
+        <div class="produit-content">
+          <h4>Matelas Luxe</h4>
+          <p>Ressorts ensachés, ultra confort</p>
+          <button>Ajouter</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPT JS POUR LE CARROUSEL -->
+  <script>
+    const carousel = document.querySelector('.carousel-images');
+    const images = document.querySelectorAll('.carousel-images img');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+
+    let index = 0;
+
+    function updateCarousel() {
+      carousel.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      index = (index + 1) % images.length;
+      updateCarousel();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      index = (index - 1 + images.length) % images.length;
+      updateCarousel();
+    });
+  </script>
+
+</body>
+</html>

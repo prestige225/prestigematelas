@@ -1,0 +1,80 @@
+<style>
+   body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.header {
+  background: linear-gradient(to right, #005aa7, #fffde4);
+  color: white;
+  padding-bottom: 100px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: #ff6f61;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.cta:hover {
+  background: #e55a4f;
+}
+ 
+</style>
+<header class="header">
+  <nav class="navbar">
+    <div class="logo">École Prestige</div>
+    <ul class="nav-links">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#formations">Formations</a></li>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section class="hero">
+    <h1>Formons les leaders de demain</h1>
+    <p>Une éducation moderne et accessible à tous</p>
+    <a href="#contact" class="cta">Nous contacter</a>
+  </section>
+</header>

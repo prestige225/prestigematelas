@@ -1,0 +1,1010 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Prestige Store</title>
+  <link rel="stylesheet" href="styl.CSS" />
+  <style>
+    /* === Reset et base === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* === Header === */
+header {
+  background-color: #2563eb;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+header h1 {
+  font-size: 1.5rem;
+}
+header nav a {
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+header nav a:hover {
+  color: #cbd5e1;
+}
+
+/* === Hero Section === */
+.hero {
+  background-color: #f1f5f9;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+.hero h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+.hero a {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+.hero a:hover {
+  background-color: #1e40af;
+}
+
+/* === Produits Section === */
+.produits {
+  padding: 2rem;
+}
+.produits h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+.grid-produits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.produit {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.produit:hover {
+  transform: translateY(-5px);
+}
+/* .produit img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+} */
+
+
+
+.produit img {
+  width: 100%;
+  height: 500px; /* augmente la hauteur */
+  object-fit: cover;
+  border-bottom: 4px solid #2563eb; /* ligne bleue décorative */
+}
+
+.produit-content {
+  padding: 1rem;
+}
+.produit-content h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.produit-content p {
+  font-size: 0.9rem;
+  color: #555;
+}
+.produit button {
+  margin-top: 0.8rem;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+.produit button:hover {
+  background-color: #15803d;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  header nav {
+    margin-top: 1rem;
+  }
+  .hero h2 {
+    font-size: 1.5rem;
+  }
+  .grid-produits {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .hero p {
+    font-size: 1rem;
+  }
+  .produit img {
+    height: 160px;
+  }
+}
+
+.liste-produits-horizontal {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.liste-produits-horizontal::-webkit-scrollbar {
+  display: none; /* cacher la barre de scroll */
+}
+
+.liste-produits-horizontal .produit {
+  min-width: 250px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.liste-produits-horizontal .produit:hover {
+  transform: scale(1.02);
+}
+
+.liste-produits-horizontal img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.produit-content {
+  padding: 1rem;
+}
+.produit-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.produit-content p {
+  font-size: 0.9rem;
+  color: #555;
+}
+.produit-content button {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1rem;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+
+
+/* === Carrousel d'images pour chaque produit === */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-bottom: 4px solid #2563eb;
+  border-radius: 12px 12px 0 0;
+}
+.carousel img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+.carousel img.active {
+  opacity: 1;
+  z-index: 1;
+}
+.carousel button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+}
+.carousel .prev {
+  left: 10px;
+}
+.carousel .next {
+  right: 10px;
+}
+
+/* Responsive pour les carrousels */
+@media (max-width: 768px) {
+  .carousel {
+    height: 250px;
+  }
+}
+@media (max-width: 480px) {
+  .carousel {
+    height: 180px;
+  }
+}
+
+
+
+
+.welcomme-step {
+      text-align: center;
+      padding: 70px 20px;
+      background: linear-gradient(135deg, #e3f2fd, #e0f7fa, #f0f4c3);
+      color: #333;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcomme-step h2 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #007BFF;
+      animation: bounceIn 1.2s ease forwards;
+    }
+
+    .welcomme-step .subtitle {
+      font-size: 1.3rem;
+      color: #00bfa5;
+      margin-bottom: 40px;
+      animation: fadeInUp 2s ease;
+    }
+
+    .carousel-container {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-tra {
+      display: flex;
+      gap: 25px;
+      animation: scroll-carousel 25s linear infinite;
+    }
+
+    .carousel-item {
+      flex: 0 0 auto;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid #fff;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      background: #fff;
+      transition: transform 0.4s ease;
+      position: relative;
+    }
+
+    .carousel-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.05));
+      pointer-events: none;
+    }
+
+    .carousel-item:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+     @keyframes scroll-carousel {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .carousel-item {
+        width: 100px;
+        height: 100px;
+      }
+
+      .welcomme-step h2 {
+        font-size: 2rem;
+      }
+
+      .welcomme-step .subtitle {
+        font-size: 1.1rem;
+      }
+    }
+
+
+
+
+    .footer {
+  background-color: #1e2a38;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 40px;
+  padding: 40px 20px 20px;
+}
+
+.footer-box {
+  max-width: 300px;
+}
+
+.footer-box h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #FFDD57;
+}
+
+.footer-box p,
+.footer-box a {
+  margin: 8px 0;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.social {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social:hover {
+  transform: scale(1.2) rotate(5deg);
+  box-shadow: 0 0 15px rgba(255, 221, 87, 0.6);
+}
+
+/* Couleurs sociales */
+.facebook { background-color: #3b5998; }
+.instagram { background: radial-gradient(circle at 30% 30%, #feda75, #d62976, #962fbf); }
+.whatsapp { background-color: #25d366; }
+.youtube { background-color: #FF0000; }
+.linkedin { background-color: #0077b5; }
+.twitter { background-color: #1da1f2; }
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsletter-form input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.newsletter-form button {
+  padding: 10px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.newsletter-form button:hover {
+  background-color: #005fa3;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 250px;
+  display: block;
+  margin-top: 30px;
+  border: 0;
+}
+
+.footer-bottom {
+  background-color: #121c29;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+
+/* === Lightbox Zoom === */
+ .lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+.lightbox-img {
+  max-width: 90%;
+  max-height: 80%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+  border-radius: 12px;
+}
+.lightbox .close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 1001;
+}
+
+
+
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Prestige Store</h1>
+    <nav>
+      <a href="#">Accueil</a>
+      <a href="#">Produits</a>
+      <a href="#">Panier</a>
+    </nav>
+  </header>
+
+
+
+
+
+  <section class="welcomme-step">
+  <h2>Welcome to Number One Shop.ci</h2>
+  <p class="subtitle">We Make the Difference</p>
+
+  <div class="carousel-container">
+    <div class="carousel-tra">
+      <div class="carousel-item"><img src="image/MATELA3.jpg" alt=""></div>
+      <div class="carousel-item"><img src="image/MATELA4.jpg" alt=""></div>
+      <div class="carousel-item"><img src="image/matelas 1.jpg" alt=""></div>
+      <div class="carousel-item"><img src="image/matelas 1.jpg" alt=""></div>
+       <div class="carousel-item"><img src="image/MATELAS2.jpg" alt=""></div>
+      <div class="carousel-item"><img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt=""></div>
+      <div class="carousel-item"><img src="image/MATELA5.jpg" alt=""></div>
+      <div class="carousel-item"><img src="image/MATHELA6.jpg" alt=""></div>
+      <div class="carousel-item"><img src="image/MATHELA7.jpg" alt=""></div>
+      <div class="carousel-item"><img src="image/MATHELA6.jpg" alt=""></div>
+    </div>
+  </div>
+</section> 
+
+
+  <section class="produits">
+  <h3>Nos Matelas</h3>
+  <div class="liste-produits-horizontal">
+
+    <!-- Matelas Confort -->
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt="Matelas Confort" class="active" />
+        <img src="image/matelas 1.jpg" alt="Matelas Confort angle" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Confort détails" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Confort</h4>
+        <p>Épaisseur 25cm, mousse mémoire</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt="Matelas Confort" class="active" />
+        <img src="image/matelas 1.jpg" alt="Matelas Confort angle" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Confort détails" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Confort</h4>
+        <p>Épaisseur 25cm, mousse mémoire</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt="Matelas Confort" class="active" />
+        <img src="image/matelas 1.jpg" alt="Matelas Confort angle" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Confort détails" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Confort</h4>
+        <p>Épaisseur 25cm, mousse mémoire</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+    <!-- Matelas Premium -->
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/MATELA3.jpg" alt="Matelas Premium" class="active" />
+        <img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt="Matelas Premium autre vue" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Premium détails" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Premium</h4>
+        <p>Orthopédique, double face</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+    <!-- Matelas Luxe -->
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/MATELA3.jpg" alt="Matelas Luxe" class="active" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Luxe profil" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Luxe texture" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Luxe</h4>
+        <p>Ressorts ensachés, ultra confort</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+</section>
+
+
+
+
+<section class="produits">
+  <h3>Nos Matelas</h3>
+  <div class="liste-produits-horizontal">
+
+    <!-- Matelas Confort -->
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt="Matelas Confort" class="active" />
+        <img src="image/matelas 1.jpg" alt="Matelas Confort angle" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Confort détails" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Confort</h4>
+        <p>Épaisseur 25cm, mousse mémoire</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt="Matelas Confort" class="active" />
+        <img src="image/matelas 1.jpg" alt="Matelas Confort angle" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Confort détails" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Confort</h4>
+        <p>Épaisseur 25cm, mousse mémoire</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/MATELA4.jpg" alt="Matelas Confort" class="active" />
+        <img src="image/matelas 1.jpg" alt="Matelas Confort angle" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Confort détails" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Confort</h4>
+        <p>Épaisseur 25cm, mousse mémoire</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+    <!-- Matelas Premium -->
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/MATELA3.jpg" alt="Matelas Premium" class="active" />
+        <img src="image/vue-du-matelas-3d-avec-des-nuages.jpg" alt="Matelas Premium autre vue" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Premium détails" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Premium</h4>
+        <p>Orthopédique, double face</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+    <!-- Matelas Luxe -->
+    <div class="produit">
+      <div class="carousel">
+        <img src="image/MATELA3.jpg" alt="Matelas Luxe" class="active" />
+        <img src="image/MATELA4.jpg" alt="Matelas Luxe profil" />
+        <img src="image/MATELAS2.jpg" alt="Matelas Luxe texture" />
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <div class="produit-content">
+        <h4>Matelas Luxe</h4>
+        <p>Ressorts ensachés, ultra confort</p>
+        <button>Ajouter</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lightbox Image Zoom  -->
+ <div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-img" src="" alt="Aperçu du matelas">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+  <footer class="footer">
+  <div class="footer-container">
+
+    <!-- Contact -->
+    <div class="footer-box">
+      <h3>📍 Nous contacter</h3>
+      <p><strong>Adresse :</strong> Marcory, Abidjan, Côte d'Ivoire</p>
+      <p><strong>Téléphone :</strong> +225 07 00 00 00 00</p>
+      <p><strong>Email :</strong> contact@prestigedigitschool.ci</p>
+    </div>
+
+    <!-- Réseaux sociaux -->
+    <div class="footer-box">
+      <h3>🌐 Suivez-nous</h3>
+      <div class="social-icons">
+        <a href="https://facebook.com" class="social facebook" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com" class="social instagram" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/2250700000000" class="social whatsapp" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://youtube.com" class="social youtube" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://linkedin.com" class="social linkedin" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://twitter.com" class="social twitter" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="footer-box">
+      <h3>📬 Newsletter</h3>
+      <p>Recevez nos dernières actualités et événements</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Votre email" required>
+        <button type="submit">S’inscrire</button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- Carte Google Maps -->
+  <div class="map-container">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.300285951906!2d-4.008256284668429!3d5.303117496095774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfb84c9270a50c65%3A0xc62c7d4e65e4ad1c!2sMarcory!5e0!3m2!1sfr!2sci!4v1684006549917!5m2!1sfr!2sci" 
+      width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+    </iframe>
+  </div>
+
+  <!-- Bas de page -->
+  <div class="footer-bottom">
+    <p>&copy; 2025 Prestige Digit School. Tous droits réservés.</p>
+  </div>
+</footer>
+
+
+  <!-- SCRIPT POUR CARROUSEL -->
+  <!-- <script>
+    const carousel = document.querySelector('.carousel-images');
+    const images = document.querySelectorAll('.carousel-images img');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+
+    let index = 0;
+
+    function updateCarousel() {
+      carousel.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      index = (index + 1) % images.length;
+      updateCarousel();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      index = (index - 1 + images.length) % images.length;
+      updateCarousel();
+    });
+
+
+
+
+
+    document.querySelectorAll('.carousel').forEach(carousel => {
+    const images = carousel.querySelectorAll('img');
+    let index = 0;
+
+    const showImage = (i) => {
+      images.forEach(img => img.classList.remove('active'));
+      images[i].classList.add('active');
+    };
+
+    carousel.querySelector('.next').addEventListener('click', () => {
+      index = (index + 1) % images.length;
+      showImage(index);
+    });
+
+    carousel.querySelector('.prev').addEventListener('click', () => {
+      index = (index - 1 + images.length) % images.length;
+      showImage(index);
+    });
+
+    showImage(index);
+  });
+
+
+
+
+  // // Zoom Lightbox
+  // const lightbox = document.getElementById("lightbox");
+  // const lightboxImg = document.querySelector(".lightbox-img");
+  // const closeBtn = document.querySelector(".lightbox .close");
+
+  // // Clic sur une image de matelas
+  // document.querySelectorAll(".produit img").forEach(img => {
+  //   img.addEventListener("click", () => {
+  //     lightbox.style.display = "flex";
+  //     lightboxImg.src = img.src;
+  //   });
+  // });
+
+  // // Fermer la lightbox
+  // closeBtn.addEventListener("click", () => {
+  //   lightbox.style.display = "none";
+  // });
+
+  // // Fermer si on clique en dehors de l'image
+  // lightbox.addEventListener("click", (e) => {
+  //   if (e.target === lightbox) {
+  //     lightbox.style.display = "none";
+  //   }
+  // });
+  
+  </script> -->
+
+
+
+
+
+  <script>
+  const lightbox = document.getElementById("lightbox");
+  const closeBtn = lightbox.querySelector(".close");
+  const carouselContainer = lightbox.querySelector(".carousel-images");
+  const prevBtn = lightbox.querySelector(".prev");
+  const nextBtn = lightbox.querySelector(".next");
+
+  let index = 0;
+  let allImages = [];
+
+  // Ouvrir le lightbox au clic sur une image
+  document.querySelectorAll(".produit img").forEach((img, i) => {
+    img.addEventListener("click", () => {
+      // Récupérer toutes les images .produit img
+      allImages = Array.from(document.querySelectorAll(".produit img"));
+
+      // Nettoyer le container
+      carouselContainer.innerHTML = "";
+
+      // Ajouter toutes les images au carrousel
+      allImages.forEach(image => {
+        const imgClone = document.createElement("img");
+        imgClone.src = image.src;
+        carouselContainer.appendChild(imgClone);
+      });
+
+      // Positionner sur l'image cliquée
+      index = i;
+      updateCarousel();
+      lightbox.style.display = "flex";
+    });
+  });
+
+  // Mettre à jour le carrousel
+  function updateCarousel() {
+    carouselContainer.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  // Navigation suivante
+  nextBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Empêche de fermer le lightbox
+    index = (index + 1) % allImages.length;
+    updateCarousel();
+  });
+
+  // Navigation précédente
+  prevBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    index = (index - 1 + allImages.length) % allImages.length;
+    updateCarousel();
+  });
+
+  // Fermer le lightbox
+  closeBtn.addEventListener("click", () => {
+    lightbox.style.display = "none";
+  });
+
+  // Fermer si clic à l'extérieur
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      lightbox.style.display = "none";
+    }
+  });
+</script>
+
+
+
+
+
+
+
+ 
+
+</body>
+</html>
